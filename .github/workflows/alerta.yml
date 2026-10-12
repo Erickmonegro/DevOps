@@ -1,0 +1,20 @@
+name: Notificacion de Despliegue
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Ejecutar programa Hola Mundo
+        run: node app.js
+
+      - name: Enviar notificacion a ntfy
+        run: |
+          curl -d "Se ha subido nuevo codigo a la rama main en el repositorio ${{ github.repository }}" ntfy.sh/devops-itla
